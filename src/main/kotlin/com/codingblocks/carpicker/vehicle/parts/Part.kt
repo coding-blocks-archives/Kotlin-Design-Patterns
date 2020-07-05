@@ -1,5 +1,7 @@
 package com.codingblocks.carpicker.vehicle.parts
 
 interface Part {
-    val price: Int
+
+    val selfPrice: Int
+    val totalCost: Int
 }
