@@ -1,13 +1,13 @@
 package com.codingblocks.carpicker.vehicle
 
-import com.codingblocks.carpicker.vehicle.parts.Chasis
-import com.codingblocks.carpicker.vehicle.parts.Engine
-import com.codingblocks.carpicker.vehicle.parts.WheelBase
+import com.codingblocks.carpicker.vehicle.parts.chasis.Chasis
+import com.codingblocks.carpicker.vehicle.parts.engine.Engine
+import com.codingblocks.carpicker.vehicle.parts.wheelbase.WheelBase
 
 class Vehicle private constructor(
     val wheelBase: WheelBase,
-    val chasis: Chasis,
-    val engine: Engine
+    private val chasis: Chasis,
+    private val engine: Engine
 ) {
     val price = (wheelBase.totalCost + engine.totalCost + chasis.totalCost)
 

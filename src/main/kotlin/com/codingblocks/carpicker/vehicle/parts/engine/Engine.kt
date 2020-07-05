@@ -1,4 +1,7 @@
-package com.codingblocks.carpicker.vehicle.parts
+package com.codingblocks.carpicker.vehicle.parts.engine
+
+import com.codingblocks.carpicker.vehicle.parts.Part
+import com.codingblocks.carpicker.vehicle.parts.transmission.Transmission
 
 class Engine private constructor(
     val type: Type,
@@ -33,7 +36,10 @@ class Engine private constructor(
         }
 
         fun build(): Engine {
-            return Engine(this.engineType, this.transmission)
+            return Engine(
+                this.engineType,
+                this.transmission
+            )
         }
     }
 }

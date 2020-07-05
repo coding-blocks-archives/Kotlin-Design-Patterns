@@ -1,4 +1,7 @@
-package com.codingblocks.carpicker.vehicle.parts
+package com.codingblocks.carpicker.vehicle.parts.wheelbase
+
+import com.codingblocks.carpicker.vehicle.parts.Part
+import com.codingblocks.carpicker.vehicle.parts.wheel.Wheel
 
 class WheelBase private constructor(
     val size: Size,
@@ -21,7 +24,7 @@ class WheelBase private constructor(
         private lateinit var wheelFactory: Wheel.Factory
         private var spareWheel: Boolean = false
 
-        fun setSize(size: WheelBase.Size): Builder {
+        fun setSize(size: Size): Builder {
             this.size = size
             return this
         }

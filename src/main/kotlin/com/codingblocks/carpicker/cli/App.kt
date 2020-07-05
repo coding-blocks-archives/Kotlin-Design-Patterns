@@ -1,7 +1,12 @@
 package com.codingblocks.carpicker.cli
 
 import com.codingblocks.carpicker.vehicle.Vehicle
-import com.codingblocks.carpicker.vehicle.parts.*
+import com.codingblocks.carpicker.vehicle.parts.chasis.Chasis
+import com.codingblocks.carpicker.vehicle.parts.engine.Engine
+import com.codingblocks.carpicker.vehicle.parts.seat.Seat
+import com.codingblocks.carpicker.vehicle.parts.transmission.Transmission
+import com.codingblocks.carpicker.vehicle.parts.wheel.Wheel
+import com.codingblocks.carpicker.vehicle.parts.wheelbase.WheelBase
 import com.github.ajalt.clikt.core.UsageError
 import com.github.ajalt.clikt.output.TermUi
 
@@ -37,9 +42,15 @@ class App {
             "Enter type of wheels: (S)teel, (A)lloy, (C)arbon-fibre"
         ) {
             when (it) {
-                "S", "s" -> wheelBaseBuilder.setWheelFactory(Wheel.Factory(Wheel.Type.STEEL))
-                "A", "a" -> wheelBaseBuilder.setWheelFactory(Wheel.Factory(Wheel.Type.ALLOY))
-                "C", "c" -> wheelBaseBuilder.setWheelFactory(Wheel.Factory(Wheel.Type.CARBONFIBRE))
+                "S", "s" -> wheelBaseBuilder.setWheelFactory(
+                    Wheel.Factory(
+                        Wheel.Type.STEEL))
+                "A", "a" -> wheelBaseBuilder.setWheelFactory(
+                    Wheel.Factory(
+                        Wheel.Type.ALLOY))
+                "C", "c" -> wheelBaseBuilder.setWheelFactory(
+                    Wheel.Factory(
+                        Wheel.Type.CARBONFIBRE))
                 else -> throw UsageError("Wheels have to be S, A or C")
             }
         }
@@ -62,9 +73,15 @@ class App {
             "Enter seat fabric: (C)loth, (R)exine, (L)eather"
         ) {
             when (it) {
-                "C", "c" -> chasisBuilder.setSeatFactory(Seat.Factory(Seat.Upholstery.CLOTH))
-                "R", "r" -> chasisBuilder.setSeatFactory(Seat.Factory(Seat.Upholstery.REXINE))
-                "L", "l" -> chasisBuilder.setSeatFactory(Seat.Factory(Seat.Upholstery.LEATHER))
+                "C", "c" -> chasisBuilder.setSeatFactory(
+                    Seat.Factory(
+                        Seat.Upholstery.CLOTH))
+                "R", "r" -> chasisBuilder.setSeatFactory(
+                    Seat.Factory(
+                        Seat.Upholstery.REXINE))
+                "L", "l" -> chasisBuilder.setSeatFactory(
+                    Seat.Factory(
+                        Seat.Upholstery.LEATHER))
                 else -> throw UsageError("Seat fabric has to be C, R or L")
 
             }
@@ -73,7 +90,11 @@ class App {
 
     fun prepareEngineBuilder() {
         engineBuilder.setEngineType(Engine.Type.DIESEL)
-        engineBuilder.setTransmission(Transmission(Transmission.Type.FWD))
+        engineBuilder.setTransmission(
+            Transmission(
+                Transmission.Type.FWD
+            )
+        )
 
     }
 

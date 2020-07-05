@@ -1,9 +1,6 @@
 package com.codingblocks.carpicker
 
 import com.codingblocks.carpicker.cli.App
-import com.codingblocks.carpicker.vehicle.Vehicle
-import com.codingblocks.carpicker.vehicle.parts.*
-import com.github.ajalt.clikt.core.UsageError
 import com.github.ajalt.clikt.output.TermUi
 
 class Main {

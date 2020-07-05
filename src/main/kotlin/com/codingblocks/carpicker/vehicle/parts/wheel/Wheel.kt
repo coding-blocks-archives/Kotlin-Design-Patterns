@@ -1,4 +1,6 @@
-package com.codingblocks.carpicker.vehicle.parts
+package com.codingblocks.carpicker.vehicle.parts.wheel
+
+import com.codingblocks.carpicker.vehicle.parts.Part
 
 class Wheel private constructor(
     val type: Type

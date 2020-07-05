@@ -1,4 +1,7 @@
-package com.codingblocks.carpicker.vehicle.parts
+package com.codingblocks.carpicker.vehicle.parts.chasis
+
+import com.codingblocks.carpicker.vehicle.parts.Part
+import com.codingblocks.carpicker.vehicle.parts.seat.Seat
 
 class Chasis private constructor(
     val type: Type,
@@ -18,10 +21,10 @@ class Chasis private constructor(
     enum class Type { HATCHBACK, SEDAN, SUV, PICKUP }
 
     class Builder {
-        private lateinit var chasisType: Chasis.Type
+        private lateinit var chasisType: Type
         private lateinit var seatFactory: Seat.Factory
 
-        fun setChasisType(chasisType: Chasis.Type): Builder {
+        fun setChasisType(chasisType: Type): Builder {
             this.chasisType = chasisType
             return this
         }

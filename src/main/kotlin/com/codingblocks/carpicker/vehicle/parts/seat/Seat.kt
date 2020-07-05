@@ -1,4 +1,6 @@
-package com.codingblocks.carpicker.vehicle.parts
+package com.codingblocks.carpicker.vehicle.parts.seat
+
+import com.codingblocks.carpicker.vehicle.parts.Part
 
 class Seat private constructor(
     val upholstery: Upholstery

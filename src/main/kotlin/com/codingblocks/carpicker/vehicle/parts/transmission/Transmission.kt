@@ -1,6 +1,9 @@
-package com.codingblocks.carpicker.vehicle.parts
+package com.codingblocks.carpicker.vehicle.parts.transmission
 
-class Transmission(val type: Type) : Part {
+import com.codingblocks.carpicker.vehicle.parts.Part
+
+class Transmission(val type: Type) :
+    Part {
     override val selfPrice: Int
         get() = when (this.type) {
             Type.RWD -> 90000
