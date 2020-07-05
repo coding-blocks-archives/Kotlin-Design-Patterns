@@ -15,11 +15,11 @@ class WheelBase(
         get() = when (this.size) {
             Size.SMALL -> 100000
             Size.MEDIUM -> 125000
-            Size.BIG -> 175000
+            Size.LARGE -> 175000
         }
     override val totalCost: Int
         get() = selfPrice + chasis.totalCost + wheels.sumBy { it.totalCost }
 
-    enum class Size { SMALL, MEDIUM, BIG }
+    enum class Size { SMALL, MEDIUM, LARGE }
 
 }

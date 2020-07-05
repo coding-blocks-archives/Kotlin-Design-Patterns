@@ -1,42 +1,59 @@
 package com.codingblocks.carpicker
 
 import com.codingblocks.carpicker.vehicle.Vehicle
-import com.codingblocks.carpicker.vehicle.parts.Chasis
-import com.codingblocks.carpicker.vehicle.parts.Engine
-import com.codingblocks.carpicker.vehicle.parts.Transmission
-import com.codingblocks.carpicker.vehicle.parts.WheelBase
-import com.codingblocks.carpicker.vehicle.parts.Seat
-import com.codingblocks.carpicker.vehicle.parts.Wheel
+import com.codingblocks.carpicker.vehicle.parts.*
+import com.github.ajalt.clikt.core.UsageError
+import com.github.ajalt.clikt.output.TermUi
 
 class Main {
     companion object {
 
         @JvmStatic
         fun main(args: Array<String>) {
-            println("Hello World")
-
-            val hondaCity = Vehicle(
-                WheelBase(
-                    WheelBase.Size.MEDIUM,
-                    Chasis(
-                        Chasis.Type.SEDAN,
-                        Seat.Factory(Seat.Upholstery.LEATHER)
-                    ),
-                    Wheel.Factory(Wheel.Type.STEEL)
-                ),
-                Engine(
-                    Engine.Type.DIESEL,
-                    Transmission(Transmission.Type.AWD)
-                )
+            println(
+                """
+            | ------- Welcome to Car Picker 1.0 ---------
+            | Here you can build your very own car, with 
+            | with everthing fully customisable. Feel free
+            | to pick engine, seats, wheels etc.
+            """.trimMargin()
             )
 
-            val ecosport = Vehicle(
+            if (TermUi.confirm("Continue to build car ?") != true) {
+                return
+            }
+
+            val wheelBaseSize: WheelBase.Size = TermUi.prompt(
+                "Enter wheelbase size: (S)mall, (M)edium or (L)arge"
+            ) {
+                when (it) {
+                    "S", "s" -> WheelBase.Size.SMALL
+                    "M", "m" -> WheelBase.Size.MEDIUM
+                    "L", "l" -> WheelBase.Size.LARGE
+                    else -> throw UsageError("Size has to be S, M or L")
+                }
+            }!!
+
+            val chasisBuilder = Chasis.Builder()
+
+            TermUi.prompt(
+                "Enter chasis type: (H)atchback, (S)edan, SU(V) or (P)ickup "
+            ) {
+                when (it) {
+                    "H", "h" -> chasisBuilder.setChasisType(Chasis.Type.HATCHBACK)
+                    "S", "s" -> chasisBuilder.setChasisType(Chasis.Type.SEDAN)
+                    "V", "v" -> chasisBuilder.setChasisType(Chasis.Type.SUV)
+                    "P", "p" -> chasisBuilder.setChasisType(Chasis.Type.PICKUP)
+                    else -> throw UsageError("Size has to be S, M or L")
+                }
+            }!!
+
+            chasisBuilder.setSeatFactory(Seat.Factory(Seat.Upholstery.REXINE))
+
+            val myCar = Vehicle(
                 WheelBase(
-                    WheelBase.Size.SMALL,
-                    Chasis(
-                        Chasis.Type.SUV,
-                        Seat.Factory(Seat.Upholstery.REXINE)
-                    ),
+                    wheelBaseSize,
+                    chasisBuilder.build(),
                     Wheel.Factory(Wheel.Type.ALLOY),
                     spareWheel = true
                 ),
@@ -46,9 +63,8 @@ class Main {
                 )
             )
 
-            println("HondaCity = ₹${hondaCity.price}")
-            println("Ecosport = ₹${ecosport.price}")
-            println("Ecosport wheels = ${ecosport.wheelBase.numWheels}")
+            println("Ecosport = ₹${myCar.price}")
+            println("Ecosport wheels = ${myCar.wheelBase.numWheels}")
 
         }
     }

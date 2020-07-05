@@ -1,6 +1,6 @@
 package com.codingblocks.carpicker.vehicle.parts
 
-class Chasis(
+class Chasis private constructor(
     val type: Type,
     val seatFactory: Seat.Factory
 ) : Part {
@@ -25,4 +25,24 @@ class Chasis(
         get() = selfPrice + seats.sumBy { it.totalCost }
 
     enum class Type { HATCHBACK, SEDAN, SUV, PICKUP }
+
+    class Builder {
+        lateinit var chasisType: Chasis.Type
+        lateinit var seatFactory: Seat.Factory
+
+        fun setChasisType(chasisType: Chasis.Type): Builder {
+            this.chasisType = chasisType
+            return this
+        }
+
+        fun setSeatFactory(seatFactory: Seat.Factory): Builder {
+            this.seatFactory = seatFactory
+            return this
+        }
+
+
+        fun build(): Chasis {
+            return Chasis(this.chasisType, this.seatFactory)
+        }
+    }
 }
