@@ -43,7 +43,7 @@ class WheelBase private constructor(
             return WheelBase(
                 this.size,
                 this.wheelFactory.createWheels(
-                    4 + if (this.spareWheel) 1 else 0
+                    numWheels =  4 + if (this.spareWheel) 1 else 0
                 )
             )
         }

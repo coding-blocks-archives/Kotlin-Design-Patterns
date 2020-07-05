@@ -2,26 +2,35 @@ package com.codingblocks.carpicker.vehicle.parts.wheel
 
 import com.codingblocks.carpicker.vehicle.parts.Part
 
-class Wheel private constructor(
-    val type: Type
-) : Part {
-    override val selfPrice: Int
-        get() = when (this.type) {
-            Type.STEEL -> 10000
-            Type.ALLOY -> 12000
-            Type.CARBONFIBRE -> 20000
-        }
 
-    override val totalCost = selfPrice
+interface Wheel : Part {
+
+    val diaInch: Int
+    val widthInch: Int
+    val type: Wheel.Type
+    val basePrice: Int
+
+    override val selfPrice get() = basePrice * diaInch * widthInch
+    override val totalCost get() = selfPrice
 
     enum class Type { STEEL, ALLOY, CARBONFIBRE }
 
+    // Abstract factory pattern
     class Factory(
         val type: Type
     ) {
-
-        fun createWheels(numWheels: Int): List<Wheel> {
-            return generateSequence { Wheel(type) }.take(numWheels).toList()
+        fun createWheels(
+            diaInch: Int = 16,
+            widthInch: Int = 8,
+            numWheels: Int = 4
+        ): List<Wheel> {
+            return generateSequence {
+                when (type) {
+                    Type.STEEL -> SteelWheel(diaInch, widthInch)
+                    Type.ALLOY -> AlloyWheel(diaInch, widthInch)
+                    Type.CARBONFIBRE -> CarbonFibreWheel(diaInch, widthInch)
+                }
+            }.take(numWheels).toList()
         }
     }
 }
