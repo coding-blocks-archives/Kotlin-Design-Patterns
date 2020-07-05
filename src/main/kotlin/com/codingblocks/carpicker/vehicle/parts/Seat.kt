@@ -17,8 +17,8 @@ class Seat private constructor(
 
     class Factory(val upholstery: Upholstery) {
 
-        fun createSeat(): Seat {
-            return Seat(upholstery)
+        fun createSeats(numSeats: Int): List<Seat> {
+            return generateSequence { Seat(upholstery) }.take(numSeats).toList()
         }
     }
 }

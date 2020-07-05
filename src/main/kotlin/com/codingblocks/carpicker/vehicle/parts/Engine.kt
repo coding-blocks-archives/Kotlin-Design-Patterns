@@ -1,6 +1,6 @@
 package com.codingblocks.carpicker.vehicle.parts
 
-class Engine(
+class Engine private constructor(
     val type: Type,
     val transmission: Transmission
 ) : Part {
@@ -16,4 +16,24 @@ class Engine(
         get() = selfPrice + transmission.totalCost
 
     enum class Type { PETROL, DIESEL, HYBRID, ELECTRIC }
+
+    class Builder {
+
+        private lateinit var engineType: Type
+        private lateinit var transmission: Transmission
+
+        fun setEngineType(engineType: Type): Builder {
+            this.engineType = engineType
+            return this
+        }
+
+        fun setTransmission(transmission: Transmission): Builder {
+            this.transmission = transmission
+            return this
+        }
+
+        fun build(): Engine {
+            return Engine(this.engineType, this.transmission)
+        }
+    }
 }

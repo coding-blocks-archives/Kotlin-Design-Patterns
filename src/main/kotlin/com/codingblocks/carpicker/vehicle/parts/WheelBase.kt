@@ -1,15 +1,9 @@
 package com.codingblocks.carpicker.vehicle.parts
 
-class WheelBase(
+class WheelBase private constructor(
     val size: Size,
-    val chasis: Chasis,
-    val wheelFactory: Wheel.Factory,
-    val spareWheel: Boolean = false
+    val wheels: List<Wheel>
 ) : Part {
-
-    val numWheels = 4 + (if (spareWheel) 1 else 0)
-
-    val wheels: List<Wheel> = generateSequence { wheelFactory.createWheel() }.take(numWheels).toList()
 
     override val selfPrice: Int
         get() = when (this.size) {
@@ -18,8 +12,38 @@ class WheelBase(
             Size.LARGE -> 175000
         }
     override val totalCost: Int
-        get() = selfPrice + chasis.totalCost + wheels.sumBy { it.totalCost }
+        get() = selfPrice + wheels.sumBy { it.totalCost }
 
     enum class Size { SMALL, MEDIUM, LARGE }
+
+    class Builder {
+        private lateinit var size: Size
+        private lateinit var wheelFactory: Wheel.Factory
+        private var spareWheel: Boolean = false
+
+        fun setSize(size: WheelBase.Size): Builder {
+            this.size = size
+            return this
+        }
+
+        fun setWheelFactory(wheelFactory: Wheel.Factory): Builder {
+            this.wheelFactory = wheelFactory
+            return this
+        }
+
+        fun setSpareWheel(spareWheel: Boolean): Builder {
+            this.spareWheel = spareWheel
+            return this
+        }
+
+        fun build(): WheelBase {
+            return WheelBase(
+                this.size,
+                this.wheelFactory.createWheels(
+                    4 + if (this.spareWheel) 1 else 0
+                )
+            )
+        }
+    }
 
 }

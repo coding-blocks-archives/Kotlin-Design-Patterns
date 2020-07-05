@@ -2,18 +2,9 @@ package com.codingblocks.carpicker.vehicle.parts
 
 class Chasis private constructor(
     val type: Type,
-    val seatFactory: Seat.Factory
+    val seats: List<Seat>
 ) : Part {
 
-    val numSeats: Int = when (this.type) {
-        Type.HATCHBACK -> 4
-        Type.SEDAN -> 5
-        Type.SUV -> 8
-        Type.PICKUP -> 6
-    }
-
-    val seats: List<Seat> = generateSequence { seatFactory.createSeat() }.take(numSeats).toList()
-    
     override val selfPrice: Int
         get() = when (this.type) {
             Type.HATCHBACK -> 150000
@@ -27,8 +18,8 @@ class Chasis private constructor(
     enum class Type { HATCHBACK, SEDAN, SUV, PICKUP }
 
     class Builder {
-        lateinit var chasisType: Chasis.Type
-        lateinit var seatFactory: Seat.Factory
+        private lateinit var chasisType: Chasis.Type
+        private lateinit var seatFactory: Seat.Factory
 
         fun setChasisType(chasisType: Chasis.Type): Builder {
             this.chasisType = chasisType
@@ -42,7 +33,16 @@ class Chasis private constructor(
 
 
         fun build(): Chasis {
-            return Chasis(this.chasisType, this.seatFactory)
+            val numSeats = when (this.chasisType) {
+                Type.HATCHBACK -> 4
+                Type.SEDAN -> 5
+                Type.SUV -> 8
+                Type.PICKUP -> 6
+            }
+            return Chasis(
+                this.chasisType,
+                this.seatFactory.createSeats(numSeats)
+            )
         }
     }
 }
