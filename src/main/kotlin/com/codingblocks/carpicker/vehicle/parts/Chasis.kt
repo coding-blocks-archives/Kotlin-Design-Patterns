@@ -1,8 +1,15 @@
 package com.codingblocks.carpicker.vehicle.parts
 
-class Chasis(val type: Type) : Part {
+class Chasis(
+    val type: Type,
+    val seatFactory: Seat.Factory
+) : Part {
+
     val seats: List<Seat> = listOf(
-        Seat(), Seat(), Seat(), Seat()
+        seatFactory.createSeat(),
+        seatFactory.createSeat(),
+        seatFactory.createSeat(),
+        seatFactory.createSeat()
     )
     override val selfPrice: Int
         get() = when (this.type) {

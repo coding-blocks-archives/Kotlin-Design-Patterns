@@ -1,15 +1,21 @@
 package com.codingblocks.carpicker.vehicle.parts
 
-class WheelBase (
+class WheelBase(
     val size: Size,
-    val chasis: Chasis
+    val chasis: Chasis,
+    val wheelFactory: Wheel.Factory
+
 ) : Part {
 
     val wheels: List<Wheel> = listOf(
-        Wheel(), Wheel(), Wheel(), Wheel()
+        wheelFactory.createWheel(),
+        wheelFactory.createWheel(),
+        wheelFactory.createWheel(),
+        wheelFactory.createWheel()
     )
+
     override val selfPrice: Int
-        get() = when(this.size) {
+        get() = when (this.size) {
             Size.SMALL -> 100000
             Size.MEDIUM -> 125000
             Size.BIG -> 175000

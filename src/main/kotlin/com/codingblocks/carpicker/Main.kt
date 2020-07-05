@@ -5,6 +5,8 @@ import com.codingblocks.carpicker.vehicle.parts.Chasis
 import com.codingblocks.carpicker.vehicle.parts.Engine
 import com.codingblocks.carpicker.vehicle.parts.Transmission
 import com.codingblocks.carpicker.vehicle.parts.WheelBase
+import com.codingblocks.carpicker.vehicle.parts.Seat
+import com.codingblocks.carpicker.vehicle.parts.Wheel
 
 class Main {
     companion object {
@@ -16,7 +18,11 @@ class Main {
             val hondaCity = Vehicle(
                 WheelBase(
                     WheelBase.Size.MEDIUM,
-                    Chasis(Chasis.Type.SEDAN)
+                    Chasis(
+                        Chasis.Type.SEDAN,
+                        Seat.Factory(Seat.Upholstery.LEATHER)
+                    ),
+                    Wheel.Factory(Wheel.Type.STEEL)
                 ),
                 Engine(
                     Engine.Type.DIESEL,
@@ -27,7 +33,11 @@ class Main {
             val ecosport = Vehicle(
                 WheelBase(
                     WheelBase.Size.SMALL,
-                    Chasis(Chasis.Type.SUV)
+                    Chasis(
+                        Chasis.Type.SUV,
+                        Seat.Factory(Seat.Upholstery.REXINE)
+                    ),
+                    Wheel.Factory(Wheel.Type.ALLOY)
                 ),
                 Engine(
                     Engine.Type.PETROL,
