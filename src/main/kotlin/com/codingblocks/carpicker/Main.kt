@@ -37,7 +37,8 @@ class Main {
                         Chasis.Type.SUV,
                         Seat.Factory(Seat.Upholstery.REXINE)
                     ),
-                    Wheel.Factory(Wheel.Type.ALLOY)
+                    Wheel.Factory(Wheel.Type.ALLOY),
+                    spareWheel = true
                 ),
                 Engine(
                     Engine.Type.PETROL,
@@ -47,6 +48,7 @@ class Main {
 
             println("HondaCity = ₹${hondaCity.price}")
             println("Ecosport = ₹${ecosport.price}")
+            println("Ecosport wheels = ${ecosport.wheelBase.numWheels}")
 
         }
     }
