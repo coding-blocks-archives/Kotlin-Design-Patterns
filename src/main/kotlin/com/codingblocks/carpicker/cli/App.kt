@@ -43,14 +43,14 @@ class App {
         ) {
             when (it) {
                 "S", "s" -> wheelBaseBuilder.setWheelFactory(
-                    Wheel.Factory(
-                        Wheel.Type.STEEL))
+                    Wheel.Factory.steelWheelFactory()
+                )
                 "A", "a" -> wheelBaseBuilder.setWheelFactory(
-                    Wheel.Factory(
-                        Wheel.Type.ALLOY))
+                    Wheel.Factory.alloyWheelFactory()
+                )
                 "C", "c" -> wheelBaseBuilder.setWheelFactory(
-                    Wheel.Factory(
-                        Wheel.Type.CARBONFIBRE))
+                    Wheel.Factory.carbonFibreWheelFactory()
+                )
                 else -> throw UsageError("Wheels have to be S, A or C")
             }
         }
@@ -75,13 +75,19 @@ class App {
             when (it) {
                 "C", "c" -> chasisBuilder.setSeatFactory(
                     Seat.Factory(
-                        Seat.Upholstery.CLOTH))
+                        Seat.Upholstery.CLOTH
+                    )
+                )
                 "R", "r" -> chasisBuilder.setSeatFactory(
                     Seat.Factory(
-                        Seat.Upholstery.REXINE))
+                        Seat.Upholstery.REXINE
+                    )
+                )
                 "L", "l" -> chasisBuilder.setSeatFactory(
                     Seat.Factory(
-                        Seat.Upholstery.LEATHER))
+                        Seat.Upholstery.LEATHER
+                    )
+                )
                 else -> throw UsageError("Seat fabric has to be C, R or L")
 
             }
@@ -90,11 +96,41 @@ class App {
 
     fun prepareEngineBuilder() {
         engineBuilder.setEngineType(Engine.Type.DIESEL)
-        engineBuilder.setTransmission(
-            Transmission(
-                Transmission.Type.FWD
-            )
-        )
+
+        val transmissionFactory = TermUi.prompt(
+            "Do you want an (A)utomatic or (M)anual ?"
+        ) {
+            when (it) {
+                "A", "a" -> Transmission.Factory.automaticTransmissionFactory()
+                "M", "m" -> Transmission.Factory.manualTransmissionFactory()
+                else -> throw UsageError("Please enter A or M")
+            }
+        }!!
+
+        TermUi.prompt(
+            "Select drivetrain: (R)WD, (F)WD, (A)WD"
+        ) {
+
+            when (it) {
+                "R", "r" -> engineBuilder.setTransmission(
+                    transmissionFactory.createTransmission(
+                        Transmission.DriveType.RWD
+                    )
+                )
+                "F", "f" -> engineBuilder.setTransmission(
+                    transmissionFactory.createTransmission(
+                        Transmission.DriveType.FWD
+                    )
+                )
+                "A", "a" -> engineBuilder.setTransmission(
+                    transmissionFactory.createTransmission(
+                        Transmission.DriveType.AWD
+                    )
+                )
+                else -> throw UsageError("Please enter R, F or A")
+            }
+        }
+
 
     }
 

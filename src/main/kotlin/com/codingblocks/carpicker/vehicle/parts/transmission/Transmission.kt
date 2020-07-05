@@ -2,16 +2,30 @@ package com.codingblocks.carpicker.vehicle.parts.transmission
 
 import com.codingblocks.carpicker.vehicle.parts.Part
 
-class Transmission(val type: Type) :
-    Part {
-    override val selfPrice: Int
-        get() = when (this.type) {
-            Type.RWD -> 90000
-            Type.FWD -> 75000
-            Type.AWD -> 110000
+interface Transmission : Part {
+
+    val driveType: DriveType
+    val shiftType: ShiftType
+
+    override val totalCost get() = selfPrice
+
+    enum class DriveType { RWD, FWD, AWD }
+    enum class ShiftType { MANUAL, AUTOMATIC }
+
+    /**
+     * Abstract factory interface to create transmissions.
+     * All classes that extend [Transmission] should have their
+     * own factories.
+     */
+    interface Factory {
+        fun createTransmission(driveType: DriveType): Transmission
+
+        companion object {
+            fun automaticTransmissionFactory() = AutomaticTransmission.Factory()
+            fun manualTransmissionFactory() = ManualTransmission.Factory()
         }
+    }
 
-    override val totalCost = selfPrice
 
-    enum class Type { RWD, FWD, AWD }
+
 }

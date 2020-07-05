@@ -16,7 +16,7 @@ interface Wheel : Part {
     enum class Type { STEEL, ALLOY, CARBONFIBRE }
 
     // Abstract factory pattern
-    class Factory(
+    class Factory private constructor(
         val type: Type
     ) {
         fun createWheels(
@@ -32,5 +32,12 @@ interface Wheel : Part {
                 }
             }.take(numWheels).toList()
         }
+
+        companion object {
+            fun alloyWheelFactory() = Factory(Type.ALLOY)
+            fun steelWheelFactory() = Factory(Type.STEEL)
+            fun carbonFibreWheelFactory() = Factory(Type.CARBONFIBRE)
+        }
     }
+
 }
