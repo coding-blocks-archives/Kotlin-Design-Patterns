@@ -3,10 +3,11 @@ package com.codingblocks.carpicker.vehicle.parts.chasis
 import com.codingblocks.carpicker.vehicle.parts.Part
 import com.codingblocks.carpicker.vehicle.parts.seat.Seat
 
-class Chasis private constructor(
-    val type: Type,
+interface Chassis : Part {
+    enum class Type { HATCHBACK, SEDAN, SUV, PICKUP }
+
+    val type: Type
     val seats: List<Seat>
-) : Part {
 
     override val selfPrice: Int
         get() = when (this.type) {
@@ -18,7 +19,6 @@ class Chasis private constructor(
     override val totalCost: Int
         get() = selfPrice + seats.sumBy { it.totalCost }
 
-    enum class Type { HATCHBACK, SEDAN, SUV, PICKUP }
 
     class Builder {
         private lateinit var chasisType: Type
@@ -35,17 +35,21 @@ class Chasis private constructor(
         }
 
 
-        fun build(): Chasis {
+        fun build(): Chassis {
             val numSeats = when (this.chasisType) {
                 Type.HATCHBACK -> 4
                 Type.SEDAN -> 5
                 Type.SUV -> 8
                 Type.PICKUP -> 6
             }
-            return Chasis(
-                this.chasisType,
-                this.seatFactory.createSeats(numSeats)
-            )
+            val seats = this.seatFactory.createSeats(numSeats)
+            return when (this.chasisType) {
+                Type.HATCHBACK -> HatchbackChassis(seats)
+                Type.SEDAN -> SedanChassis(seats)
+                Type.SUV -> SuvChassis(seats)
+                Type.PICKUP -> PickupChassis(seats)
+            }
+
         }
     }
 }

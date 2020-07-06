@@ -1,7 +1,7 @@
 package com.codingblocks.carpicker.cli
 
 import com.codingblocks.carpicker.vehicle.Vehicle
-import com.codingblocks.carpicker.vehicle.parts.chasis.Chasis
+import com.codingblocks.carpicker.vehicle.parts.chasis.Chassis
 import com.codingblocks.carpicker.vehicle.parts.engine.Engine
 import com.codingblocks.carpicker.vehicle.parts.seat.Seat
 import com.codingblocks.carpicker.vehicle.parts.transmission.Transmission
@@ -14,7 +14,7 @@ class App {
 
     private val vehicleBuilder = Vehicle.Builder()
     private val wheelBaseBuilder = WheelBase.Builder()
-    private val chasisBuilder = Chasis.Builder()
+    private val chasisBuilder = Chassis.Builder()
     private val engineBuilder = Engine.Builder()
 
     val welcomeString
@@ -62,10 +62,10 @@ class App {
             "Enter chasis type: (H)atchback, (S)edan, SU(V) or (P)ickup "
         ) {
             when (it) {
-                "H", "h" -> chasisBuilder.setChasisType(Chasis.Type.HATCHBACK)
-                "S", "s" -> chasisBuilder.setChasisType(Chasis.Type.SEDAN)
-                "V", "v" -> chasisBuilder.setChasisType(Chasis.Type.SUV)
-                "P", "p" -> chasisBuilder.setChasisType(Chasis.Type.PICKUP)
+                "H", "h" -> chasisBuilder.setChasisType(Chassis.Type.HATCHBACK)
+                "S", "s" -> chasisBuilder.setChasisType(Chassis.Type.SEDAN)
+                "V", "v" -> chasisBuilder.setChasisType(Chassis.Type.SUV)
+                "P", "p" -> chasisBuilder.setChasisType(Chassis.Type.PICKUP)
                 else -> throw UsageError("Size has to be S, M or L")
             }
         }!!

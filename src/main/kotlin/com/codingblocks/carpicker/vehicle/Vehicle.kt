@@ -1,27 +1,27 @@
 package com.codingblocks.carpicker.vehicle
 
-import com.codingblocks.carpicker.vehicle.parts.chasis.Chasis
+import com.codingblocks.carpicker.vehicle.parts.chasis.Chassis
 import com.codingblocks.carpicker.vehicle.parts.engine.Engine
 import com.codingblocks.carpicker.vehicle.parts.wheelbase.WheelBase
 
 class Vehicle private constructor(
     val wheelBase: WheelBase,
-    private val chasis: Chasis,
+    private val chassis: Chassis,
     private val engine: Engine
 ) {
-    val price = (wheelBase.totalCost + engine.totalCost + chasis.totalCost)
+    val price = (wheelBase.totalCost + engine.totalCost + chassis.totalCost)
 
     class Builder {
         private lateinit var wheelBase: WheelBase
-        private lateinit var chasis: Chasis
+        private lateinit var chassis: Chassis
         private lateinit var engine: Engine
 
         fun setWheelBase(wheelBase: WheelBase): Builder {
             this.wheelBase = wheelBase
             return this
         }
-        fun setChasis(chasis: Chasis): Builder {
-            this.chasis = chasis
+        fun setChasis(chassis: Chassis): Builder {
+            this.chassis = chassis
             return this
         }
         fun setEngine(engine: Engine): Builder {
@@ -32,7 +32,7 @@ class Vehicle private constructor(
         fun build(): Vehicle {
             return Vehicle(
                 this.wheelBase,
-                this.chasis,
+                this.chassis,
                 this.engine
             )
         }
