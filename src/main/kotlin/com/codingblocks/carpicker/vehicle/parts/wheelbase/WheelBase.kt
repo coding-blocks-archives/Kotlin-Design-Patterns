@@ -3,21 +3,15 @@ package com.codingblocks.carpicker.vehicle.parts.wheelbase
 import com.codingblocks.carpicker.vehicle.parts.Part
 import com.codingblocks.carpicker.vehicle.parts.wheel.Wheel
 
-class WheelBase private constructor(
-    val size: Size,
-    val wheels: List<Wheel>
-) : Part {
+interface WheelBase : Part {
+    enum class Size { SMALL, MEDIUM, LARGE }
 
-    override val selfPrice: Int
-        get() = when (this.size) {
-            Size.SMALL -> 100000
-            Size.MEDIUM -> 125000
-            Size.LARGE -> 175000
-        }
+    val size: Size
+    val wheels: List<Wheel>
+
     override val totalCost: Int
         get() = selfPrice + wheels.sumBy { it.totalCost }
 
-    enum class Size { SMALL, MEDIUM, LARGE }
 
     class Builder {
         private lateinit var size: Size
@@ -40,12 +34,14 @@ class WheelBase private constructor(
         }
 
         fun build(): WheelBase {
-            return WheelBase(
-                this.size,
-                this.wheelFactory.createWheels(
-                    numWheels =  4 + if (this.spareWheel) 1 else 0
-                )
+            val wheels = this.wheelFactory.createWheels(
+                numWheels =  4 + if (this.spareWheel) 1 else 0
             )
+            return when (this.size) {
+                Size.SMALL -> SmallWheelBase(wheels)
+                Size.MEDIUM -> MediumWheelBase(wheels)
+                Size.LARGE -> LargeWheelBase(wheels)
+            }
         }
     }
 

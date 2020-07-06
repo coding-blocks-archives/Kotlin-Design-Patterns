@@ -17,7 +17,5 @@ class ManualTransmission private constructor(
     class Factory : Transmission.Factory {
         override fun createTransmission(driveType: Transmission.DriveType) =
             ManualTransmission(driveType)
-
-
     }
 }
