@@ -3,22 +3,15 @@ package com.codingblocks.carpicker.vehicle.parts.engine
 import com.codingblocks.carpicker.vehicle.parts.Part
 import com.codingblocks.carpicker.vehicle.parts.transmission.Transmission
 
-class Engine private constructor(
-    val type: Type,
-    val transmission: Transmission
-) : Part {
+interface Engine : Part {
+    enum class Type { PETROL, DIESEL, HYBRID, ELECTRIC }
 
-    override val selfPrice: Int
-        get() = when (this.type) {
-            Type.PETROL -> 100000
-            Type.DIESEL -> 200000
-            Type.HYBRID -> 500000
-            Type.ELECTRIC -> 400000
-        }
+    val type: Type
+    val transmission: Transmission
+
     override val totalCost: Int
         get() = selfPrice + transmission.totalCost
 
-    enum class Type { PETROL, DIESEL, HYBRID, ELECTRIC }
 
     class Builder {
 
@@ -35,11 +28,11 @@ class Engine private constructor(
             return this
         }
 
-        fun build(): Engine {
-            return Engine(
-                this.engineType,
-                this.transmission
-            )
+        fun build(): Engine = when (this.engineType) {
+            Type.PETROL -> PetrolEngine(this.transmission)
+            Type.DIESEL -> DieselEngine(this.transmission)
+            Type.HYBRID -> HybridEngine(this.transmission)
+            Type.ELECTRIC -> ElectricEngine(this.transmission)
         }
     }
 }
