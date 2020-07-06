@@ -1,7 +1,7 @@
 package com.codingblocks.carpicker.cli
 
 import com.codingblocks.carpicker.vehicle.Vehicle
-import com.codingblocks.carpicker.vehicle.parts.chasis.Chassis
+import com.codingblocks.carpicker.vehicle.parts.chassis.Chassis
 import com.codingblocks.carpicker.vehicle.parts.engine.Engine
 import com.codingblocks.carpicker.vehicle.parts.seat.Seat
 import com.codingblocks.carpicker.vehicle.parts.transmission.Transmission
@@ -14,7 +14,7 @@ class App {
 
     private val vehicleBuilder = Vehicle.Builder()
     private val wheelBaseBuilder = WheelBase.Builder()
-    private val chasisBuilder = Chassis.Builder()
+    private val chassisBuilder = Chassis.Builder()
     private val engineBuilder = Engine.Builder()
 
     val welcomeString
@@ -57,15 +57,15 @@ class App {
 
     }
 
-    fun prepareChasisBuilder() {
+    fun prepareChassisBuilder() {
         TermUi.prompt(
-            "Enter chasis type: (H)atchback, (S)edan, SU(V) or (P)ickup "
+            "Enter chassis type: (H)atchback, (S)edan, SU(V) or (P)ickup "
         ) {
             when (it) {
-                "H", "h" -> chasisBuilder.setChasisType(Chassis.Type.HATCHBACK)
-                "S", "s" -> chasisBuilder.setChasisType(Chassis.Type.SEDAN)
-                "V", "v" -> chasisBuilder.setChasisType(Chassis.Type.SUV)
-                "P", "p" -> chasisBuilder.setChasisType(Chassis.Type.PICKUP)
+                "H", "h" -> chassisBuilder.setChassisType(Chassis.Type.HATCHBACK)
+                "S", "s" -> chassisBuilder.setChassisType(Chassis.Type.SEDAN)
+                "V", "v" -> chassisBuilder.setChassisType(Chassis.Type.SUV)
+                "P", "p" -> chassisBuilder.setChassisType(Chassis.Type.PICKUP)
                 else -> throw UsageError("Size has to be S, M or L")
             }
         }!!
@@ -73,17 +73,17 @@ class App {
             "Enter seat fabric: (C)loth, (R)exine, (L)eather"
         ) {
             when (it) {
-                "C", "c" -> chasisBuilder.setSeatFactory(
+                "C", "c" -> chassisBuilder.setSeatFactory(
                     Seat.Factory(
                         Seat.Upholstery.CLOTH
                     )
                 )
-                "R", "r" -> chasisBuilder.setSeatFactory(
+                "R", "r" -> chassisBuilder.setSeatFactory(
                     Seat.Factory(
                         Seat.Upholstery.REXINE
                     )
                 )
-                "L", "l" -> chasisBuilder.setSeatFactory(
+                "L", "l" -> chassisBuilder.setSeatFactory(
                     Seat.Factory(
                         Seat.Upholstery.LEATHER
                     )
@@ -136,7 +136,7 @@ class App {
 
     fun buildVehicle(): Vehicle = vehicleBuilder
         .setWheelBase(wheelBaseBuilder.build())
-        .setChasis(chasisBuilder.build())
+        .setChassis(chassisBuilder.build())
         .setEngine(engineBuilder.build())
         .build()
 

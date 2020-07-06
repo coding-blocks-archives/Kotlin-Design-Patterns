@@ -17,7 +17,7 @@ class Main {
             }
 
             app.prepareWheelBaseBuilder()
-            app.prepareChasisBuilder()
+            app.prepareChassisBuilder()
             app.prepareEngineBuilder()
 
             val myCar = app.buildVehicle()

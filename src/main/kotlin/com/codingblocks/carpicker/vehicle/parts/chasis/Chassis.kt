@@ -1,4 +1,4 @@
-package com.codingblocks.carpicker.vehicle.parts.chasis
+package com.codingblocks.carpicker.vehicle.parts.chassis
 
 import com.codingblocks.carpicker.vehicle.parts.Part
 import com.codingblocks.carpicker.vehicle.parts.seat.Seat
@@ -21,11 +21,11 @@ interface Chassis : Part {
 
 
     class Builder {
-        private lateinit var chasisType: Type
+        private lateinit var chassisType: Type
         private lateinit var seatFactory: Seat.Factory
 
-        fun setChasisType(chasisType: Type): Builder {
-            this.chasisType = chasisType
+        fun setChassisType(chassisType: Type): Builder {
+            this.chassisType = chassisType
             return this
         }
 
@@ -36,14 +36,14 @@ interface Chassis : Part {
 
 
         fun build(): Chassis {
-            val numSeats = when (this.chasisType) {
+            val numSeats = when (this.chassisType) {
                 Type.HATCHBACK -> 4
                 Type.SEDAN -> 5
                 Type.SUV -> 8
                 Type.PICKUP -> 6
             }
             val seats = this.seatFactory.createSeats(numSeats)
-            return when (this.chasisType) {
+            return when (this.chassisType) {
                 Type.HATCHBACK -> HatchbackChassis(seats)
                 Type.SEDAN -> SedanChassis(seats)
                 Type.SUV -> SuvChassis(seats)

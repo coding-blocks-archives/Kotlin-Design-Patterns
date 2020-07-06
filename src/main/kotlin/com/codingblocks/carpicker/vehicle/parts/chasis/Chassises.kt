@@ -1,4 +1,4 @@
-package com.codingblocks.carpicker.vehicle.parts.chasis
+package com.codingblocks.carpicker.vehicle.parts.chassis
 
 import com.codingblocks.carpicker.vehicle.parts.seat.Seat
 

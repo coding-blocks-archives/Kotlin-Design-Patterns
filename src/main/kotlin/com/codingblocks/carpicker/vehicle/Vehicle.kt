@@ -1,6 +1,6 @@
 package com.codingblocks.carpicker.vehicle
 
-import com.codingblocks.carpicker.vehicle.parts.chasis.Chassis
+import com.codingblocks.carpicker.vehicle.parts.chassis.Chassis
 import com.codingblocks.carpicker.vehicle.parts.engine.Engine
 import com.codingblocks.carpicker.vehicle.parts.wheelbase.WheelBase
 
@@ -20,7 +20,7 @@ class Vehicle private constructor(
             this.wheelBase = wheelBase
             return this
         }
-        fun setChasis(chassis: Chassis): Builder {
+        fun setChassis(chassis: Chassis): Builder {
             this.chassis = chassis
             return this
         }
