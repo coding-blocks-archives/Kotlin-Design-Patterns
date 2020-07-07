@@ -1,0 +1,29 @@
+buildscript {
+	apply plugin: 'idea'
+	
+	repositories {
+	    jcenter()
+	}
+
+	ext.kotlin_version = '1.3.72'
+	
+	dependencies {
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+	}
+}
+allprojects {
+	apply plugin: 'java'
+	apply plugin: 'org.jetbrains.kotlin.jvm'
+	apply plugin: 'idea'
+
+	repositories {
+	    mavenCentral()
+	}
+	
+	compileKotlin {
+	    kotlinOptions.jvmTarget = "11"
+	}
+	compileTestKotlin {
+	    kotlinOptions.jvmTarget = "11"
+	}
+}
