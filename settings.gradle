@@ -1,2 +1,4 @@
 rootProject.name = 'CarPicker'
+include 'car-picker-lib'
+include 'car-picker-cli'
 
