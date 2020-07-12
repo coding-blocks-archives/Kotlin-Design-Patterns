@@ -4,12 +4,12 @@ import com.codingblocks.carpicker.vehicle.parts.chassis.Chassis
 import com.codingblocks.carpicker.vehicle.parts.engine.Engine
 import com.codingblocks.carpicker.vehicle.parts.wheelbase.WheelBase
 
-class Vehicle private constructor(
-    val wheelBase: WheelBase,
-    private val chassis: Chassis,
-    private val engine: Engine
-) {
-    val price = (wheelBase.totalCost + engine.totalCost + chassis.totalCost)
+interface Vehicle {
+    val wheelBase: WheelBase
+    val chassis: Chassis
+    val engine: Engine
+
+    val price get() = (wheelBase.totalCost + engine.totalCost + chassis.totalCost)
 
     class Builder {
         private lateinit var wheelBase: WheelBase
@@ -20,21 +20,21 @@ class Vehicle private constructor(
             this.wheelBase = wheelBase
             return this
         }
+
         fun setChassis(chassis: Chassis): Builder {
             this.chassis = chassis
             return this
         }
+
         fun setEngine(engine: Engine): Builder {
             this.engine = engine
             return this
         }
 
-        fun build(): Vehicle {
-            return Vehicle(
-                this.wheelBase,
-                this.chassis,
-                this.engine
-            )
+        fun build(): Vehicle = object : Vehicle {
+            override val wheelBase = this@Builder.wheelBase
+            override val chassis = this@Builder.chassis
+            override val engine = this@Builder.engine
         }
 
     }
