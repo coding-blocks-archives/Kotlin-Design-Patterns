@@ -1,6 +1,9 @@
 package com.codingblocks.carpicker
 
 import com.codingblocks.carpicker.cli.App
+import com.codingblocks.carpicker.di.components.DaggerCarPicker
+import com.codingblocks.carpicker.vehicle.vehicles.FordF150
+import com.codingblocks.carpicker.vehicle.vehicles.FordF150_Factory
 import com.github.ajalt.clikt.output.TermUi
 
 class Main {
@@ -19,6 +22,8 @@ class Main {
             app.prepareWheelBaseBuilder()
             app.prepareChassisBuilder()
             app.prepareEngineBuilder()
+
+            DaggerCarPicker.create()
 
             val myCar = app.buildVehicle()
 

@@ -13,9 +13,7 @@
     </wildcardResourcePatterns>
     <bytecodeTargetLevel target="11" />
   </component>
-  <component name="CopyrightManager" default="">
-    <module2copyright />
-  </component>
+  <component name="CopyrightManager" default="" />
   <component name="DependencyValidationManager">
     <option name="SKIP_IMPORT_STATEMENTS" value="false" />
   </component>
@@ -34,21 +32,123 @@
     <version value="1.0" />
   </component>
   <component name="JavadocGenerationManager">
-    <option name="OUTPUT_DIRECTORY" />
-    <option name="OPTION_SCOPE" value="protected" />
-    <option name="OPTION_HIERARCHY" value="true" />
-    <option name="OPTION_NAVIGATOR" value="true" />
-    <option name="OPTION_INDEX" value="true" />
-    <option name="OPTION_SEPARATE_INDEX" value="true" />
-    <option name="OPTION_DOCUMENT_TAG_USE" value="false" />
-    <option name="OPTION_DOCUMENT_TAG_AUTHOR" value="false" />
-    <option name="OPTION_DOCUMENT_TAG_VERSION" value="false" />
-    <option name="OPTION_DOCUMENT_TAG_DEPRECATED" value="true" />
-    <option name="OPTION_DEPRECATED_LIST" value="true" />
     <option name="OTHER_OPTIONS" value="" />
-    <option name="HEAP_SIZE" />
-    <option name="LOCALE" />
-    <option name="OPEN_IN_BROWSER" value="true" />
+  </component>
+  <component name="ProjectCodeStyleConfiguration">
+    <option name="USE_PER_PROJECT_SETTINGS" value="true" />
+    <code_scheme name="Project" version="173">
+      <editorconfig>
+        <option name="ENABLED" value="false" />
+      </editorconfig>
+      <codeStyleSettings language="XML">
+        <arrangement>
+          <rules>
+            <section>
+              <rule>
+                <match>
+                  <AND>
+                    <NAME>xmlns:android</NAME>
+                    <XML_ATTRIBUTE />
+                    <XML_NAMESPACE>^$</XML_NAMESPACE>
+                  </AND>
+                </match>
+              </rule>
+            </section>
+            <section>
+              <rule>
+                <match>
+                  <AND>
+                    <NAME>xmlns:.*</NAME>
+                    <XML_ATTRIBUTE />
+                    <XML_NAMESPACE>^$</XML_NAMESPACE>
+                  </AND>
+                </match>
+                <order>BY_NAME</order>
+              </rule>
+            </section>
+            <section>
+              <rule>
+                <match>
+                  <AND>
+                    <NAME>.*:id</NAME>
+                    <XML_ATTRIBUTE />
+                    <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>
+                  </AND>
+                </match>
+              </rule>
+            </section>
+            <section>
+              <rule>
+                <match>
+                  <AND>
+                    <NAME>.*:name</NAME>
+                    <XML_ATTRIBUTE />
+                    <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>
+                  </AND>
+                </match>
+              </rule>
+            </section>
+            <section>
+              <rule>
+                <match>
+                  <AND>
+                    <NAME>name</NAME>
+                    <XML_ATTRIBUTE />
+                    <XML_NAMESPACE>^$</XML_NAMESPACE>
+                  </AND>
+                </match>
+              </rule>
+            </section>
+            <section>
+              <rule>
+                <match>
+                  <AND>
+                    <NAME>style</NAME>
+                    <XML_ATTRIBUTE />
+                    <XML_NAMESPACE>^$</XML_NAMESPACE>
+                  </AND>
+                </match>
+              </rule>
+            </section>
+            <section>
+              <rule>
+                <match>
+                  <AND>
+                    <NAME>.*</NAME>
+                    <XML_ATTRIBUTE />
+                    <XML_NAMESPACE>^$</XML_NAMESPACE>
+                  </AND>
+                </match>
+                <order>BY_NAME</order>
+              </rule>
+            </section>
+            <section>
+              <rule>
+                <match>
+                  <AND>
+                    <NAME>.*</NAME>
+                    <XML_ATTRIBUTE />
+                    <XML_NAMESPACE>http://schemas.android.com/apk/res/android</XML_NAMESPACE>
+                  </AND>
+                </match>
+              </rule>
+            </section>
+            <section>
+              <rule>
+                <match>
+                  <AND>
+                    <NAME>.*</NAME>
+                    <XML_ATTRIBUTE />
+                    <XML_NAMESPACE>.*</XML_NAMESPACE>
+                  </AND>
+                </match>
+                <order>BY_NAME</order>
+              </rule>
+            </section>
+          </rules>
+        </arrangement>
+      </codeStyleSettings>
+    </code_scheme>
   </component>
   <component name="ProjectModuleManager">
     <modules>
@@ -65,6 +165,17 @@
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+  </component>
+  <component name="libraryTable">
+    <library name="com.google.dagger:dagger:2.28.1" type="repository">
+      <properties maven-id="com.google.dagger:dagger:2.28.1" />
+      <CLASSES>
+        <root url="jar://$MAVEN_REPOSITORY$/com/google/dagger/dagger/2.28.1/dagger-2.28.1.jar!/" />
+        <root url="jar://$MAVEN_REPOSITORY$/javax/inject/javax.inject/1/javax.inject-1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
   </component>
   <component name="masterDetails">
     <states>

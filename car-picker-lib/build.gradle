@@ -1,8 +1,12 @@
+apply plugin: 'kotlin-kapt'
 
 group 'com.codingblocks'
 version '1.0-SNAPSHOT'
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
